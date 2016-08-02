@@ -16,5 +16,16 @@
 
             mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "Total Number of negative words: 2")));
         }
+
+        [Test]
+        public void PhraseIsOutput()
+        {
+            var mockLogger = new Mock<ILogger>();
+            var reporter = new BadWordReporter(mockLogger.Object);
+
+            reporter.Report("a phrase");
+
+            mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a phrase")));
+        }
     }
 }

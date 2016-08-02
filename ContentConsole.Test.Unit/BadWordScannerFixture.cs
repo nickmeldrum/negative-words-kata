@@ -20,13 +20,18 @@
         }
 
         [Test]
-        public void NegativeWordsSuppliedAreScanned()
+        [TestCase(new[] { "lorem" }, "lorem ipsum", 1)]
+        [TestCase(new[] { "lorem" }, "no bad words", 0)]
+        [TestCase(new[] { "lorem", "ipsum", "bacon", "porkchop" }, "lorem ipsum bacon vegetarian", 3)]
+        [TestCase(new[] { "lorem", "ipsum", "bacon", "porkchop", "more" }, "lorem ipsum bacon vegetarian", 3)]
+        [TestCase(new[] { "lorem", "ipsum", "bacon", "porkchop", "more" }, "lorem ipsum bacon vegetarian more", 4)]
+        public void NegativeWordsSuppliedAreScanned(string[] wordList, string phrase, int expectedNumberOfNegativeWords)
         {
-            var scanner = new BadWordScanner(new[] { "lorem", "ipsum", "bacon", "porkchop" });
+            var scanner = new BadWordScanner(wordList);
 
-            var numberOfNegativeWords = scanner.Scan("lorem ipsum bacon vegetarian");
+            var numberOfNegativeWords = scanner.Scan(phrase);
 
-            Assert.That(numberOfNegativeWords, Is.EqualTo(3));
+            Assert.That(numberOfNegativeWords, Is.EqualTo(expectedNumberOfNegativeWords));
         }
     }
 }

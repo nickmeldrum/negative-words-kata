@@ -43,5 +43,18 @@
 
             mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == hashedPhrase)));
         }
+
+        [Test]
+        public void CanDisableBadWordFiltering()
+        {
+            var mockLogger = new Mock<ILogger>();
+            var reporter = new BadWordReporter(mockLogger.Object);
+
+            reporter.DisableFiltering();
+
+            reporter.Report("a bad word", new [] {"bad"});
+
+            mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a bad word")));
+        }
     }
 }

@@ -37,5 +37,9 @@
 
             return hashedPhrase;
         }
+
+        public void DisableFiltering()
+        {
+        }
     }
 }

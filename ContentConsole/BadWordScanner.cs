@@ -1,28 +1,37 @@
 ﻿namespace ContentConsole
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class BadWordScanner
     {
+        private readonly string[] wordList;
+
+        public BadWordScanner(): this(new[] { "swine", "bad", "nasty", "horrible" })
+        {
+        }
+
+        public BadWordScanner(IEnumerable<string> wordList)
+        {
+            this.wordList = wordList.ToArray();
+        }
+
         public int Scan(string phrase)
         {
-            string bannedWord1 = "swine";
-            string bannedWord2 = "bad";
-            string bannedWord3 = "nasty";
-            string bannedWord4 = "horrible";
-
             int badWords = 0;
-            if (phrase.Contains(bannedWord1))
+            if (phrase.Contains(wordList[0]))
             {
                 badWords = badWords + 1;
             }
-            if (phrase.Contains(bannedWord2))
+            if (phrase.Contains(wordList[1]))
             {
                 badWords = badWords + 1;
             }
-            if (phrase.Contains(bannedWord3))
+            if (phrase.Contains(wordList[2]))
             {
                 badWords = badWords + 1;
             }
-            if (phrase.Contains(bannedWord4))
+            if (phrase.Contains(wordList[3]))
             {
                 badWords = badWords + 1;
             }

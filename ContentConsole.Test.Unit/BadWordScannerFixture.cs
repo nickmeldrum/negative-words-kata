@@ -18,5 +18,15 @@
 
             Assert.That(numberOfNegativeWords, Is.EqualTo(expectedNumberOfNegativeWords));
         }
+
+        [Test]
+        public void NegativeWordsSuppliedAreScanned()
+        {
+            var scanner = new BadWordScanner(new[] { "lorem", "ipsum", "bacon", "porkchop" });
+
+            var numberOfNegativeWords = scanner.Scan("lorem ipsum bacon vegetarian");
+
+            Assert.That(numberOfNegativeWords, Is.EqualTo(3));
+        }
     }
 }

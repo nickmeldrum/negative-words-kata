@@ -28,8 +28,10 @@
             foreach (var badWord in wordList)
             {
                 var hashedWord = new string(new [] {badWord[0]});
-                hashedWord += new string('#', badWord.Length - 2);
-                hashedWord += new string(new[] {badWord[badWord.Length - 1]});
+                if (badWord.Length > 2)
+                    hashedWord += new string('#', badWord.Length - 2);
+                if (badWord.Length > 1)
+                    hashedWord += new string(new[] {badWord[badWord.Length - 1]});
                 hashedPhrase = hashedPhrase.Replace(badWord, hashedWord);
             }
 

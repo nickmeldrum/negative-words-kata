@@ -31,6 +31,8 @@
         [Test]
         [TestCase(new[] { "bad" }, "a bad phrase", "a b#d phrase")]
         [TestCase(new[] { "bad", "horrible" }, "a horrible phrase", "a h######e phrase")]
+        [TestCase(new[] { "to" }, "phrase with a short bad word that is to", "phrase with a short bad word that is to")]
+        [TestCase(new[] { "I" }, "phrase with a shorter bad word that is I", "phrase with a shorter bad word that is I")]
         public void PhraseIsOutputWithBadWordsFilteredOut(string[] wordList, string phrase, string hashedPhrase)
         {
             var mockLogger = new Mock<ILogger>();

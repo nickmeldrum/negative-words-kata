@@ -27,5 +27,16 @@
 
             mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a phrase")));
         }
+
+        [Test]
+        public void PhraseIsOutputWithBadWordsFilteredOut()
+        {
+            var mockLogger = new Mock<ILogger>();
+            var reporter = new BadWordReporter(mockLogger.Object);
+
+            reporter.Report("a bad phrase", new[] { "bad" });
+
+            mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a b#d phrase")));
+        }
     }
 }

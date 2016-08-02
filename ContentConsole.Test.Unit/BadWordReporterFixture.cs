@@ -12,7 +12,7 @@
             var mockLogger = new Mock<ILogger>();
             var reporter = new BadWordReporter(mockLogger.Object);
 
-            reporter.Report("The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.");
+            reporter.Report("The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.", new[] { "swine", "bad", "nasty", "horrible" });
 
             mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "Total Number of negative words: 2")));
         }
@@ -23,7 +23,7 @@
             var mockLogger = new Mock<ILogger>();
             var reporter = new BadWordReporter(mockLogger.Object);
 
-            reporter.Report("a phrase");
+            reporter.Report("a phrase", new[] { "swine", "bad", "nasty", "horrible" });
 
             mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a phrase")));
         }

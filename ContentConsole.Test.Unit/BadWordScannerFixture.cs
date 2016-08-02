@@ -12,7 +12,7 @@
         [TestCase("The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.", 2)]
         public void PhraseHasExpectedNumberOfNegativeWords(string phrase, int expectedNumberOfNegativeWords)
         {
-            var scanner = new BadWordScanner();
+            var scanner = new BadWordScanner(new[] { "swine", "bad", "nasty", "horrible" });
 
             var numberOfNegativeWords = scanner.Scan(phrase);
 

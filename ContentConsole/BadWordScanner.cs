@@ -7,10 +7,6 @@
     {
         private readonly string[] wordList;
 
-        public BadWordScanner(): this(new[] { "swine", "bad", "nasty", "horrible" })
-        {
-        }
-
         public BadWordScanner(IEnumerable<string> wordList)
         {
             this.wordList = wordList.ToArray();

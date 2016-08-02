@@ -10,7 +10,7 @@ namespace ContentConsole
 
             var reporter = new BadWordReporter(new ConsoleLogger());
 
-            reporter.Report(content);
+            reporter.Report(content, new[] { "swine", "bad", "nasty", "horrible" });
 
             Console.WriteLine("Press ANY key to exit.");
             Console.ReadKey();

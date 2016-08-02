@@ -6,13 +6,17 @@
     public class BadWordScannerFixture
     {
         [Test]
-        public void NoWordsInPhraseThenNumberOfNegativeWordsIsZero()
+        [TestCase("", 0)]
+        [TestCase("a lovely phrase", 0)]
+        [TestCase("a bad bad bad bad nasty horrible swine of a phrase but repeated words only count once", 4)]
+        [TestCase("The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.", 2)]
+        public void PhraseHasExpectedNumberOfNegativeWords(string phrase, int expectedNumberOfNegativeWords)
         {
             var scanner = new BadWordScanner();
 
-            var numberOfNegativeWords = scanner.Scan(string.Empty);
+            var numberOfNegativeWords = scanner.Scan(phrase);
 
-            Assert.That(numberOfNegativeWords, Is.EqualTo(0));
+            Assert.That(numberOfNegativeWords, Is.EqualTo(expectedNumberOfNegativeWords));
         }
     }
 }

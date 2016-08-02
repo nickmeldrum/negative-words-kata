@@ -29,14 +29,16 @@
         }
 
         [Test]
-        public void PhraseIsOutputWithBadWordsFilteredOut()
+        [TestCase(new[] { "bad" }, "a bad phrase", "a b#d phrase")]
+        [TestCase(new[] { "bad", "horrible" }, "a horrible phrase", "a h######e phrase")]
+        public void PhraseIsOutputWithBadWordsFilteredOut(string[] wordList, string phrase, string hashedPhrase)
         {
             var mockLogger = new Mock<ILogger>();
             var reporter = new BadWordReporter(mockLogger.Object);
 
-            reporter.Report("a bad phrase", new[] { "bad" });
+            reporter.Report(phrase, wordList);
 
-            mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == "a b#d phrase")));
+            mockLogger.Verify(t => t.Output(It.Is<string>(msg => msg == hashedPhrase)));
         }
     }
 }

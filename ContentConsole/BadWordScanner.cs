@@ -18,17 +18,7 @@
 
         public int Scan(string phrase)
         {
-            var badWords = 0;
-
-            foreach (var word in wordList)
-            {
-                if (phrase.Contains(word))
-                {
-                    badWords = badWords + 1;
-                }
-            }
-
-            return badWords;
+            return wordList.Count(phrase.Contains);
         }
     }
 }

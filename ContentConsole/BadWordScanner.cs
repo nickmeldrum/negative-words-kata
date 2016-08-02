@@ -18,22 +18,14 @@
 
         public int Scan(string phrase)
         {
-            int badWords = 0;
-            if (phrase.Contains(wordList[0]))
+            var badWords = 0;
+
+            foreach (var word in wordList)
             {
-                badWords = badWords + 1;
-            }
-            if (phrase.Contains(wordList[1]))
-            {
-                badWords = badWords + 1;
-            }
-            if (phrase.Contains(wordList[2]))
-            {
-                badWords = badWords + 1;
-            }
-            if (phrase.Contains(wordList[3]))
-            {
-                badWords = badWords + 1;
+                if (phrase.Contains(word))
+                {
+                    badWords = badWords + 1;
+                }
             }
 
             return badWords;

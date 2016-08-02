@@ -12,8 +12,6 @@ namespace ContentConsole
 
             reporter.Report(content);
 
-            Console.WriteLine(content);
-
             Console.WriteLine("Press ANY key to exit.");
             Console.ReadKey();
         }

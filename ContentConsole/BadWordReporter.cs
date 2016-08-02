@@ -1,11 +1,11 @@
 ﻿namespace ContentConsole
 {
     using System.Collections.Generic;
-    using System.Text;
 
     public class BadWordReporter
     {
         private readonly ILogger logger;
+        private bool filteringDisabled = false;
 
         public BadWordReporter(ILogger logger)
         {
@@ -18,7 +18,8 @@
             var numbers = scanner.Scan(phrase);
             logger.Output("Scanned the text:");
             logger.Output("Total Number of negative words: " + numbers);
-            logger.Output(HashedPhrase(phrase, wordList));
+
+            logger.Output(filteringDisabled ? phrase : HashedPhrase(phrase, wordList));
         }
 
         private string HashedPhrase(string phrase, IEnumerable<string> wordList)
@@ -40,6 +41,7 @@
 
         public void DisableFiltering()
         {
+            filteringDisabled = true;
         }
     }
 }
